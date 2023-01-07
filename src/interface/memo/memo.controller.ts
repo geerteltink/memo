@@ -11,7 +11,9 @@ export class MemoController {
 
   @Post()
   async createMemo(@Body() dto: CreateMemoDto): Promise<string> {
-    return this.commandBus.execute(new CreateMemoCommand(dto.content, dto.isRead, dto.isArchived, dto.scheduledFor, dto.created));
+    return this.commandBus.execute(
+      new CreateMemoCommand(dto.content, dto.isRead, dto.isArchived, dto.scheduledFor, dto.created)
+    );
   }
 
   @Post(':id/append')

@@ -11,7 +11,9 @@ export class HttpClientService {
     this.axiosRef = httpService.axiosRef;
 
     this.httpService.axiosRef.interceptors.request.use((config: AxiosRequestConfig) => {
-      this.logger.log(`Sending a ${config.method.toLocaleUpperCase()} request to '${config.baseURL || ''}${config.url}'.`);
+      this.logger.log(
+        `Sending a ${config.method.toLocaleUpperCase()} request to '${config.baseURL || ''}${config.url}'.`
+      );
 
       return config;
     });
