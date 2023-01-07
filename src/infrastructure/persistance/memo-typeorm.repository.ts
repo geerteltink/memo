@@ -1,6 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Memo, MemoRepository } from 'src/domain';
-import { MemoNotFound } from 'src/domain/memo/memo-not-found.error';
+import { Memo, MemoNotFound, MemoRepository } from 'src/domain';
 import { Repository } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 import { MemoEntity } from './memo.entity';

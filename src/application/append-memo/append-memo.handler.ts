@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { MEMO_REPOSITORY, MemoRepository } from 'src/domain';
-import { AppendMemoCommand } from './append-memo.comand';
+import { MemoRepository, MEMO_REPOSITORY } from 'src/domain';
+import { AppendMemoCommand } from './append-memo.command';
 
 @CommandHandler(AppendMemoCommand)
 export class AppendMemoHandler implements ICommandHandler<AppendMemoCommand> {

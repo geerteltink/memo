@@ -4,6 +4,6 @@ export class CreateMemoCommand {
     public readonly isRead: boolean,
     public readonly isArchived: boolean,
     public readonly scheduledFor: Date,
-    public readonly created: Date,
+    public readonly created: Date
   ) {}
 }

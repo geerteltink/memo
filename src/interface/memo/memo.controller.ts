@@ -1,8 +1,7 @@
 import { Body, Controller, NotFoundException, Param, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { AppendMemoCommand } from 'src/application/append-memo/append-memo.comand';
-import { CreateMemoCommand } from 'src/application/create-memo/create-memo.comand';
-import { MemoNotFound } from 'src/domain/memo/memo-not-found.error';
+import { AppendMemoCommand, CreateMemoCommand } from 'src/application';
+import { MemoNotFound } from 'src/domain';
 import { AppendMemoDto } from './append.memo.dto';
 import { CreateMemoDto } from './create-memo.dto';
 

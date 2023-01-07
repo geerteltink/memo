@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { MEMO_REPOSITORY, MemoRepository, Memo } from 'src/domain';
-import { CreateMemoCommand } from './create-memo.comand';
 import { Serializer } from 'jsonapi-serializer';
+import { Memo, MemoRepository, MEMO_REPOSITORY } from 'src/domain';
+import { CreateMemoCommand } from './create-memo.command';
 
 @CommandHandler(CreateMemoCommand)
 export class CreateMemoHandler implements ICommandHandler<CreateMemoCommand> {
