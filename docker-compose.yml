@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: memo-service
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${SERVER_PORT}:3000
+      - 9229:9229
+    command: npm run start:dev
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    container_name: memo-redis
+    image: redis:5
+
+  postgres:
+    container_name: memo-postgres
+    image: postgres:12
+    environment:
+      POSTGRES_DB: ${DB_DATABASE_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+networks:
+  default:
+    name: memo
+    #external: true
+
+volumes:
+  pgdata:
