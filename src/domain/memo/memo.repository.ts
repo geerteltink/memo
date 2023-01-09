@@ -8,4 +8,5 @@ export interface MemoRepository {
   update(memo: Memo): Promise<void>;
   /** @throws MemoNotFound */
   findById: (id: string) => Promise<Memo | null>;
+  find: () => Promise<Memo[]>;
 }

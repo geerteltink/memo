@@ -37,6 +37,12 @@ export class MemoTypeOrmRepository implements MemoRepository {
     return this.entityToModel(entity);
   }
 
+  public async find(): Promise<Memo[]> {
+    const entities = await this.repository.find();
+
+    return entities.map(entity => this.entityToModel(entity));
+  }
+
   private modelToEntity(model: Memo): MemoEntity {
     return {
       ...model.extract(),
