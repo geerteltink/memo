@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import {
   HealthCheckService,
   HttpHealthIndicator,
@@ -7,6 +7,7 @@ import {
   DiskHealthIndicator,
   MemoryHealthIndicator,
 } from '@nestjs/terminus';
+import { Request } from 'express';
 
 @Controller('health')
 export class HealthController {
@@ -20,9 +21,11 @@ export class HealthController {
 
   @Get()
   @HealthCheck()
-  async check() {
+  async check(@Req() req: Request) {
+    const url = `${req.protocol}://${req.get('Host')}`;
+
     return this.health.check([
-      async () => this.http.pingCheck('service', 'http://localhost:3000'),
+      async () => this.http.pingCheck('service', url),
       async () => this.db.pingCheck('database'),
       // The used disk storage should not exceed 50% of the full disk size
       async () => this.disk.checkStorage('storage', { path: '/', thresholdPercent: 0.5 }),
