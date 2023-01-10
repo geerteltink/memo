@@ -1,7 +1,22 @@
-export interface CreateMemoDto {
+import { IsBoolean, IsDate, IsNotEmpty, IsOptional } from 'class-validator';
+
+export class CreateMemoDto {
+  @IsNotEmpty()
   content: string;
-  isRead?: boolean;
-  isArchived?: boolean;
-  scheduledFor?: Date;
+
+  @IsOptional()
+  @IsBoolean()
+  is_read?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  is_archived?: boolean;
+
+  @IsOptional()
+  @IsDate()
+  scheduled_for?: Date;
+
+  @IsOptional()
+  @IsDate()
   created?: Date;
 }

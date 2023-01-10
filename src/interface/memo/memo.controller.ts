@@ -28,7 +28,7 @@ export class MemoController {
   @Post()
   async createMemo(@Body() dto: CreateMemoDto): Promise<string> {
     return await this.commandBus.execute(
-      new CreateMemoCommand(dto.content, dto.isRead, dto.isArchived, dto.scheduledFor, dto.created)
+      new CreateMemoCommand(dto.content, dto.is_read, dto.is_archived, dto.scheduled_for, dto.created)
     );
   }
 

@@ -1,4 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
+import { MemoCreated } from './memo-created.event';
 import { MemoProperties } from './memo-properties.type';
 
 export class Memo extends AggregateRoot {
@@ -13,6 +14,14 @@ export class Memo extends AggregateRoot {
   constructor(properties: MemoProperties) {
     super();
     Object.assign(this, properties);
+  }
+
+  public static create(properties: MemoProperties): Memo {
+    const memo = new Memo(properties);
+
+    memo.apply(new MemoCreated(memo.id));
+
+    return memo;
   }
 
   public append(content: string, modified: Date): void {

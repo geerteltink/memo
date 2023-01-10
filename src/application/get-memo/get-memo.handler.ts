@@ -14,6 +14,7 @@ export class GetMemoHandler implements IQueryHandler<GetMemoQuery> {
   async execute(query: GetMemoQuery): Promise<string> {
     const memos = await this.memoRepository.findById(query.id);
     const serializer = new Serializer('memo', {
+      keyForAttribute: 'snake_case',
       attributes: ['content', 'isRead', 'isArchived', 'created', 'modified', 'scheduledFor'],
     });
 

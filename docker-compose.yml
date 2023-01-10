@@ -23,13 +23,23 @@ services:
     container_name: memo-redis
     image: redis:5
 
+  rabbitmq:
+    container_name: memo-rabbitmq
+    image: rabbitmq:3.11-management-alpine
+    env_file:
+      - .env
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+
   postgres:
     container_name: memo-postgres
     image: postgres:12
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: ${DB_DATABASE_NAME}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
       PG_DATA: /var/lib/postgresql/data
     ports:
       - 5432:5432
@@ -43,3 +53,5 @@ networks:
 
 volumes:
   pgdata:
+  rabbitmq:
+    driver: local

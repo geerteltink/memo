@@ -13,7 +13,10 @@ export class GetMemosHandler implements IQueryHandler<GetMemosQuery> {
 
   async execute(): Promise<string> {
     const memos = await this.memoRepository.find();
-    const serializer = new Serializer('memo', {});
+    const serializer = new Serializer('memo', {
+      keyForAttribute: 'snake_case',
+      attributes: ['isRead', 'isArchived', 'created', 'modified', 'scheduledFor'],
+    });
 
     return serializer.serialize(memos);
   }
